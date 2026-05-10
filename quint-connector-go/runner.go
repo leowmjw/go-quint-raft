@@ -166,18 +166,6 @@ func copyVars(vars map[string]*itf.Expr) map[string]*itf.Expr {
 	return cp
 }
 
-// quintAvailable reports whether the quint CLI is available in PATH.
-// It is used in tests to skip integration tests gracefully.
-func quintAvailable() bool {
-	_, err := os.Stat("/usr/local/bin/quint")
-	if err == nil {
-		return true
-	}
-	cmd := fmt.Sprintf("quint")
-	_, err = os.Stat(cmd)
-	return err == nil
-}
-
 // SkipIfNoQuint skips the test if the quint CLI is not available.
 func SkipIfNoQuint(t testing.TB) {
 	t.Helper()

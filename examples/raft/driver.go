@@ -32,9 +32,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ani03sha/raftly/raft"
 	"github.com/ani03sha/raftly/scenarios"
-	"github.com/ani03sha/raftly/transport"
 	connector "github.com/leowmjw/go-quint-raft/quint-connector-go"
 	itf "github.com/informalsystems/itf-go/itf"
 )
@@ -238,35 +236,4 @@ func rolesFromState(state itf.Expr) (itf.MapExprType, error) {
 		return nil, fmt.Errorf("roles: expected map, got %T", rolesExpr.Value)
 	}
 	return roles, nil
-}
-
-// newInMemCluster builds a raftly in-memory cluster without using the
-// scenarios package, for unit-testable cluster-creation logic.
-func newInMemCluster(nodeIDs []string, dataDir string) (map[string]*raft.RaftNode, *transport.NetworkProxy, error) {
-	proxy := transport.NewNetworkProxy()
-	registry := transport.NewInMemRegistry()
-	nodes := make(map[string]*raft.RaftNode, len(nodeIDs))
-
-	allPeers := make([]raft.PeerConfig, len(nodeIDs))
-	for i, id := range nodeIDs {
-		allPeers[i] = raft.PeerConfig{ID: id}
-	}
-
-	for _, id := range nodeIDs {
-		cfg := raft.DefaultConfig(id)
-		cfg.DataDir = dataDir + "/" + id
-		cfg.Peers = make([]raft.PeerConfig, 0, len(nodeIDs)-1)
-		for _, p := range allPeers {
-			if p.ID != id {
-				cfg.Peers = append(cfg.Peers, p)
-			}
-		}
-		t := transport.NewInMemTransport(id, proxy, registry)
-		node, err := raft.NewRaftNode(cfg, t)
-		if err != nil {
-			return nil, nil, fmt.Errorf("node %s: %w", id, err)
-		}
-		nodes[id] = node
-	}
-	return nodes, proxy, nil
 }
