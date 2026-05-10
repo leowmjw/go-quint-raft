@@ -20,8 +20,7 @@ profile.cov
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# Go workspace file
-go.work
+# Go workspace sum (generated automatically by go work sync)
 go.work.sum
 
 # env file
@@ -30,3 +29,9 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# mise toolchain cache
+.mise/
+
+# WAL data directories created by raft tests
+data/

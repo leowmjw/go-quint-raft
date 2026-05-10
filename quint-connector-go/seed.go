@@ -34,16 +34,19 @@ func logTitle(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "== "+format+"\n", args...)
 }
 
+// logInfo writes an informational message with indentation.
 func logInfo(format string, args ...any) {
 	fmt.Fprintf(os.Stderr, "   "+format+"\n", args...)
 }
 
+// logSuccess writes a success message with a [OK] prefix.
 func logSuccess(format string, args ...any) {
-	fmt.Fprintf(os.Stderr, "   "+format+"\n", args...)
+	fmt.Fprintf(os.Stderr, "   [OK] "+format+"\n", args...)
 }
 
+// logError writes an error message with a [FAIL] prefix.
 func logError(format string, args ...any) {
-	fmt.Fprintf(os.Stderr, "   "+format+"\n", args...)
+	fmt.Fprintf(os.Stderr, "   [FAIL] "+format+"\n", args...)
 }
 
 func logTrace(level int, format string, args ...any) {

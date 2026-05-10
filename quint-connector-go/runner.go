@@ -43,18 +43,18 @@ func RunSimulation(t testing.TB, driver Driver, config RunConfig) {
 
 	traces, err := generateTraces(cmd, tmpDir)
 	if err != nil {
-		logError("[FAIL] %s", t.Name())
+		logError("%s", t.Name())
 		logError("Reproduce this error with QUINT_SEED=%s", seed)
 		t.Fatalf("generating traces: %v", err)
 	}
 
 	if err := replayTraces(t, driver, traces, seed); err != nil {
-		logError("[FAIL] %s", t.Name())
+		logError("%s", t.Name())
 		logError("Reproduce this error with QUINT_SEED=%s", seed)
 		t.Fatalf("%v", err)
 	}
 
-	logSuccess("[OK] %s", t.Name())
+	logSuccess("%s", t.Name())
 }
 
 // RunTest runs model-based tests by generating traces using "quint test" for a
@@ -84,18 +84,18 @@ func RunTest(t testing.TB, driver Driver, config TestConfig) {
 
 	traces, err := generateTraces(cmd, tmpDir)
 	if err != nil {
-		logError("[FAIL] %s", t.Name())
+		logError("%s", t.Name())
 		logError("Reproduce this error with QUINT_SEED=%s", seed)
 		t.Fatalf("generating traces: %v", err)
 	}
 
 	if err := replayTraces(t, driver, traces, seed); err != nil {
-		logError("[FAIL] %s", t.Name())
+		logError("%s", t.Name())
 		logError("Reproduce this error with QUINT_SEED=%s", seed)
 		t.Fatalf("%v", err)
 	}
 
-	logSuccess("[OK] %s", t.Name())
+	logSuccess("%s", t.Name())
 }
 
 // replayTraces replays each ITF trace through the driver and optionally checks

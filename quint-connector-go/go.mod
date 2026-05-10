@@ -3,8 +3,8 @@ module github.com/leowmjw/go-quint-raft/quint-connector-go
 go 1.24
 
 require (
-	github.com/informalsystems/itf-go v0.0.0-20231109184816-c2c01b5a72e0
-	github.com/stretchr/testify v1.9.0
+	github.com/informalsystems/itf-go v0.0.1
+	github.com/stretchr/testify v1.11.1
 )
 
 require (
