@@ -1,4 +1,4 @@
-// Package hasicorpraft provides a model-based test of the hashicorp/raft
+// Package hashicorpraft provides a model-based test of the hashicorp/raft
 // library — the production Raft implementation used in Consul, Nomad, and
 // Vault — against a Quint specification.
 //
@@ -35,4 +35,4 @@
 // After every step the runner calls CheckState. Two invariants are checked:
 //  1. ElectionSafety: at most one real leader at any time.
 //  2. FSM consistency: the leader's committed KV state matches the spec's fsm.
-package hasicorpraft
+package hashicorpraft

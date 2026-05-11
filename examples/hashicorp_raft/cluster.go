@@ -1,4 +1,4 @@
-package hasicorpraft
+package hashicorpraft
 
 import (
 	"fmt"
