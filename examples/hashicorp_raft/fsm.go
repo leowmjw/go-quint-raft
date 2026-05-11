@@ -77,8 +77,8 @@ func (f *SimpleFSM) Get(key string) (string, bool) {
 	return v, ok
 }
 
-// Snapshot returns a copy of the current store contents.
-func (f *SimpleFSM) Snapshot2() map[string]string {
+// CopyStore returns a copy of the current store contents.
+func (f *SimpleFSM) CopyStore() map[string]string {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 	copy := make(map[string]string, len(f.store))

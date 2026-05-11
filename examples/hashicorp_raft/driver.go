@@ -94,7 +94,7 @@ func (d *HashicorpRaftDriver) CheckState(specState connector.ExprValue) error {
 		return nil
 	}
 
-	realFSM := leader.fsm.Snapshot2()
+	realFSM := leader.fsm.CopyStore()
 	for key, specVal := range specFSM {
 		realVal, ok := realFSM[key]
 		if !ok {
