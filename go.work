@@ -2,6 +2,7 @@ go 1.26.1
 
 use (
 	./examples/raft
+	./examples/simple_raft
 	./examples/tictactoe
 	./examples/two_phase_commit
 	./quint-connector-go

@@ -13,6 +13,7 @@ This repository contains:
 | [`quint-connector-go/`](./quint-connector-go) | Go port of [quint-connect](https://github.com/quint-co/quint-connect) (Rust) |
 | [`examples/tictactoe/`](./examples/tictactoe) | Simplest example — TicTacToe game verification |
 | [`examples/two_phase_commit/`](./examples/two_phase_commit) | Intermediate — two-phase commit protocol |
+| [`examples/simple_raft/`](./examples/simple_raft) | Intermediate — simple in-memory Raft model inspired by [elijah0528/raft](https://github.com/elijah0528/raft) |
 | [`examples/raft/`](./examples/raft) | Full example — Raft leader election using [raftly](https://github.com/ani03sha/raftly) |
 
 ## Quick Start
@@ -124,6 +125,16 @@ go test ./examples/two_phase_commit/... -v
 
 ```sh
 GOTOOLCHAIN=auto go test ./examples/raft/... -v
+```
+
+### 4. Simple Raft (leader election model)
+
+- Lightweight model inspired by [elijah0528/raft](https://github.com/elijah0528/raft)
+- Tracks node roles, terms, votes, and node liveness
+- Checks ElectionSafety + at-most-one-leader invariants on every step
+
+```sh
+go test ./examples/simple_raft/... -v
 ```
 
 ## Environment Variables
