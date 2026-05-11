@@ -1,6 +1,7 @@
 go 1.26.1
 
 use (
+	./examples/multi_group_raft
 	./examples/raft
 	./examples/tictactoe
 	./examples/two_phase_commit
