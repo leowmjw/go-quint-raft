@@ -14,6 +14,7 @@ This repository contains:
 | [`examples/tictactoe/`](./examples/tictactoe) | Simplest example — TicTacToe game verification |
 | [`examples/two_phase_commit/`](./examples/two_phase_commit) | Intermediate — two-phase commit protocol |
 | [`examples/raft/`](./examples/raft) | Full example — Raft leader election using [raftly](https://github.com/ani03sha/raftly) |
+| [`examples/hashicorp_raft/`](./examples/hashicorp_raft) | Grand-daddy Raft — leader election + log replication using [hashicorp/raft](https://github.com/hashicorp/raft) |
 
 ## Quick Start
 
@@ -124,6 +125,16 @@ go test ./examples/two_phase_commit/... -v
 
 ```sh
 GOTOOLCHAIN=auto go test ./examples/raft/... -v
+```
+
+### 4. Hashicorp Raft — leader election + log replication (grand daddy)
+
+- The production Raft used in Consul, Nomad, and Vault ([hashicorp/raft](https://github.com/hashicorp/raft))
+- In-memory 3-node cluster with a key-value FSM
+- Verifies both ElectionSafety and FSM consistency after every step
+
+```sh
+GOTOOLCHAIN=auto go test ./examples/hashicorp_raft/... -v
 ```
 
 ## Environment Variables
