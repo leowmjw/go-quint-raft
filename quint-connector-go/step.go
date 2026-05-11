@@ -2,6 +2,7 @@ package connector
 
 import (
 	"fmt"
+	"maps"
 
 	itf "github.com/informalsystems/itf-go/itf"
 )
@@ -147,9 +148,7 @@ func extractNondetFromSumType(rec itf.MapExprType) (NondetPicks, error) {
 		return NondetPicks{}, fmt.Errorf("expected nondet picks to be a record or empty tuple, got non-empty list")
 	case itf.MapExprType:
 		picks := make(map[string]itf.Expr, len(v))
-		for k, e := range v {
-			picks[k] = e
-		}
+		maps.Copy(picks, v)
 		return NondetPicks{picks: picks}, nil
 	default:
 		return NondetPicks{}, fmt.Errorf("expected nondet picks as sum type value to be a record or empty tuple, got %T; value: %v", valueExpr.Value, rec)

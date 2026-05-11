@@ -2,6 +2,7 @@ package connector
 
 import (
 	"fmt"
+	"maps"
 	"os"
 	"path/filepath"
 	"testing"
@@ -160,9 +161,7 @@ func replayTraces(t testing.TB, driver Driver, tracePaths []string, seed string)
 // mbt:: keys) do not mutate the original parsed trace.
 func copyVars(vars map[string]*itf.Expr) map[string]*itf.Expr {
 	cp := make(map[string]*itf.Expr, len(vars))
-	for k, v := range vars {
-		cp[k] = v
-	}
+	maps.Copy(cp, vars)
 	return cp
 }
 
