@@ -18,9 +18,10 @@ import (
 // dragonboat sm.IStateMachine interface.  It is used as the replicated state
 // machine for every shard in the example cluster.
 //
-// Commands are 8-byte big-endian encoded uint64 values.  The value is stored
-// under the key equal to the shard ID.  This keeps the implementation minimal
-// while still exercising the full Raft path.
+// This implementation only tracks the count of applied log entries.  The
+// command payload carried by each log entry is deliberately ignored; the
+// KVStateMachine is intentionally minimal so the example stays focused on
+// the multi-group topology and the MBT harness rather than business logic.
 type KVStateMachine struct {
 	mu      sync.RWMutex
 	shardID uint64
