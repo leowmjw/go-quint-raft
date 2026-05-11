@@ -1,0 +1,61 @@
+[env]
+GOTOOLCHAIN = "auto"
+
+[tools]
+go = "1.26.3"          # required by raftly and examples/raft
+node = "22"            # required by the quint CLI (npm install -g @informalsystems/quint)
+
+[tasks.install-quint]
+description = "Install the Quint CLI via npm"
+run = "npm install -g @informalsystems/quint"
+
+[tasks.deps]
+description = "Download and tidy all Go module dependencies"
+run = [
+  "go work sync",
+  "cd quint-connector-go && go mod tidy",
+  "cd examples/tictactoe && go mod tidy",
+  "cd examples/two_phase_commit && go mod tidy",
+  "cd examples/raft && go mod tidy",
+]
+
+[tasks.build]
+description = "Build all modules"
+run = "go build ./..."
+
+[tasks.test]
+description = "Run all tests (unit tests run always; integration tests need quint in PATH)"
+run = [
+  "go test ./quint-connector-go/...",
+  "go test ./examples/tictactoe/...",
+  "go test ./examples/two_phase_commit/...",
+  "GOTOOLCHAIN=auto go test ./examples/raft/...",
+]
+
+[tasks.test-unit]
+description = "Run only unit tests (no quint CLI required)"
+run = [
+  "go test -run 'Unit|Config|Extract|Unwrap|Nondet|Find|Vars|SumType|Run|Test' ./quint-connector-go/... -v",
+  "GOTOOLCHAIN=auto go test -run 'Unit' ./examples/raft/... -v",
+]
+
+[tasks.test-integration]
+description = "Run integration tests that require the quint CLI"
+run = [
+  "go test -run 'TicTacToe' ./examples/tictactoe/... -v",
+  "go test -run 'TwoPhase' ./examples/two_phase_commit/... -v",
+  "GOTOOLCHAIN=auto go test -run 'MBT' ./examples/raft/... -v",
+]
+
+[tasks.lint]
+description = "Run go vet on all modules"
+run = [
+  "go vet ./quint-connector-go/...",
+  "go vet ./examples/tictactoe/...",
+  "go vet ./examples/two_phase_commit/...",
+  "GOTOOLCHAIN=auto go vet ./examples/raft/...",
+]
+
+[tasks.clean]
+description = "Remove build artifacts"
+run = "go clean ./..."
